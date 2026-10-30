@@ -350,6 +350,7 @@
       <ul>
         <li><strong>Method 1:</strong> Open this GitHub Pages site in your browser, then <b>turn off Wi-Fi or unplug your ethernet cable</b>. This page runs 100% locally and transmits zero network packets.</li>
         <li><strong>Method 2 (Air-gapped / Maximum Security):</strong> Save this page locally (press <code>Ctrl+S</code> to save <code>index.html</code>), copy it onto a USB flash drive, and open it on an isolated offline computer.</li>
+        <li><strong>Keyboard Privacy:</strong> All inputs have disabled autocorrect, autocomplete, spellcheck, and learning flags. For mobile keyboards (Android/iOS), using an <b>Incognito / Private tab</b> ensures keyboard learning and telemetry are disabled by the OS.</li>
       </ul>
     </div>
   </div>
@@ -362,7 +363,10 @@
 
     <!-- Quick Paste Zone -->
     <div class="paste-zone">
-      <textarea id="pasteBox" class="paste-input" placeholder="Quick Paste: Paste your first 11 words separated by spaces here..."></textarea>
+      <textarea id="pasteBox" class="paste-input" 
+        autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" 
+        data-lpignore="true" data-form-type="other"
+        placeholder="Quick Paste: Paste your first 11 words separated by spaces here..."></textarea>
       <div class="quick-actions">
         <button class="btn btn-secondary" id="clearBtn">Clear All</button>
         <button class="btn btn-primary" id="fillSampleBtn">Load Example (11x 'abandon')</button>
@@ -436,7 +440,7 @@ window.addEventListener('online', updateNetworkStatus);
 window.addEventListener('offline', updateNetworkStatus);
 updateNetworkStatus();
 
-// Create 11 input fields
+// Create 11 input fields with privacy attributes
 const inputs = [];
 for (let i = 1; i <= 11; i++) {
   const box = document.createElement('div');
@@ -444,7 +448,10 @@ for (let i = 1; i <= 11; i++) {
   box.innerHTML = `
     <label>Word #${i}</label>
     <div class="word-input-wrapper">
-      <input type="text" class="word-input" data-index="${i - 1}" autocomplete="off" spellcheck="false" placeholder="word">
+      <input type="text" class="word-input" data-index="${i - 1}" 
+        autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" 
+        data-lpignore="true" data-form-type="other"
+        placeholder="word">
       <div class="word-autocomplete"></div>
     </div>
   `;
