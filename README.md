@@ -6,22 +6,26 @@ Live GitHub Pages: **https://dikanevn.github.io/last-seed-word/**
 
 ---
 
-## 🔒 Security & Golden Offline Rule
+## 🔒 Security & Safe Usage Rules
 
 > **CRITICAL RULE:** Never enter real recovery seed phrases on any device connected to the internet!
 
 This utility is deliberately built to run 100% locally with **zero network requests** and zero external dependencies:
 
-1. **Option 1 (Direct via Browser):**
+1. **Method 1 (Offline Browser):**
    - Open the live page on GitHub Pages: `https://dikanevn.github.io/last-seed-word/`
    - **Disconnect your internet connection** (turn off Wi-Fi or unplug ethernet). The page UI will switch to the green `OFFLINE MODE (SECURE)` status indicator.
    - Enter your 11 words and inspect the valid candidates. All SHA-256 checksum computations execute entirely inside your local browser via native `crypto.subtle.digest`.
    - Close the browser tab before reconnecting to the internet.
 
-2. **Option 2 (Air-gapped PC / Maximum Security):**
+2. **Method 2 (Air-gapped PC / Maximum Security):**
    - Download the standalone [`index.html`](index.html) file (press `Ctrl+S`).
    - Copy `index.html` to a clean USB flash drive.
    - Open and run `index.html` on a permanently air-gapped machine with no network interfaces.
+
+3. **Method 3 (Incognito / Private Tab for Extra Keyboard Privacy):**
+   - Open this tool in an **Incognito / Private browsing tab**.
+   - On mobile operating systems (especially **Android / Gboard** and iOS), the browser automatically signals the OS and virtual keyboard (`IME_FLAG_NO_PERSONALIZED_LEARNING`) to disable keystroke logging, custom dictionary learning, and cloud telemetry.
 
 ---
 
@@ -41,6 +45,7 @@ This utility is deliberately built to run 100% locally with **zero network reque
 - **100% Offline & Self-Contained:** The full 2048-word BIP-39 list and SHA-256 logic are embedded directly into a single `index.html` file.
 - **Dynamic Network Monitor:** Visual status badge alerts you if the network connection is active or disconnected.
 - **Smart Inputs & Autocomplete:** Real-time validation and prefix suggestions for all BIP-39 words.
+- **Anti-Tracking Input Attributes:** `autocomplete="off"`, `autocorrect="off"`, `autocapitalize="off"`, `spellcheck="false"`, and password-manager ignore flags on every field.
 - **Quick Paste:** Paste all 11 words separated by whitespace directly into the quick paste area.
 - **One-Click Copy:** Click any candidate word to copy the complete 12-word recovery phrase directly to your clipboard.
 - **Zero Dependencies:** Pure HTML/CSS/JavaScript with zero third-party CDNs, fonts, or tracking scripts.
