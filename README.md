@@ -1,41 +1,46 @@
-# BIP-39 12th Word Finder (100% Offline)
+# BIP-39 12th Seed Word Recovery & Calculator (100% Offline)
 
-Инструмент для вычисления всех математически валидных вариантов **12-го слова** мнемонической фразы BIP-39 по известным первым **11 словам**.
+A fast, lightweight, and completely standalone tool to calculate all mathematically valid candidates for the **12th word** of a BIP-39 mnemonic seed phrase when the first **11 words** are known.
 
-GitHub Pages: **https://dikanevn.github.io/last-seed-word/**
-
----
-
-## 🔒 Безопасность и золотое правило офлайна
-
-> **ГЛАВНОЕ ПРАВИЛО:** Никогда не вводите реальные мнемонические фразы (сид-фразы) на устройствах, подключенных к интернету!
-
-Этот генератор спроектирован полностью автономным (Zero Network Requests):
-1. **Способ 1 (через браузер):**
-   - Откройте страницу на GitHub Pages: `https://dikanevn.github.io/last-seed-word/`
-   - **Выключите Wi-Fi / выдерните сетевой кабель** (на странице загорится зеленый индикатор `ОФФЛАЙН РЕЖИМ`).
-   - Вводите слова и находите варианты. Странице не требуется интернет для вычислений (все расчеты выполняются локально через `crypto.subtle.digest` в JS).
-   - После закрытия вкладки включите сеть обратно.
-
-2. **Способ 2 (Максимальная паранойя / Air-gapped):**
-   - Скачайте один единственный файл `index.html`.
-   - Запишите его на флешку и откройте на изолированном компьютере (air-gapped ПК), на котором никогда не было и нет подключения к сети.
+Live GitHub Pages: **https://dikanevn.github.io/last-seed-word/**
 
 ---
 
-## ⚙️ Как работает математика
+## 🔒 Security & Golden Offline Rule
 
-- Словарь BIP-39 (English) содержит 2048 слов (`2^11`). Каждое слово кодирует 11 бит.
-- Первые 11 слов кодируют: `11 * 11 = 121 бит`.
-- Для 12-словной мнемоники полная энтропия составляет 128 бит, а контрольная сумма — 4 бита (первые 4 бита SHA-256 хеша от 128 бит энтропии). Итого: `128 + 4 = 132 бита = 12 * 11 бит`.
-- 12-е слово содержит оставшиеся **7 бит энтропии** (`128 - 121 = 7`) и **4 бита чексуммы**.
-- Поскольку 7 бит дают ровно `2^7 = 128` возможных комбинаций, а для каждой комбинации существует ровно одна верная 4-битная чексумма, для любых 11 слов всегда существует **ровно 128 подходящих вариантов 12-го слова** из 2048.
+> **CRITICAL RULE:** Never enter real recovery seed phrases on any device connected to the internet!
+
+This utility is deliberately built to run 100% locally with **zero network requests** and zero external dependencies:
+
+1. **Option 1 (Direct via Browser):**
+   - Open the live page on GitHub Pages: `https://dikanevn.github.io/last-seed-word/`
+   - **Disconnect your internet connection** (turn off Wi-Fi or unplug ethernet). The page UI will switch to the green `OFFLINE MODE (SECURE)` status indicator.
+   - Enter your 11 words and inspect the valid candidates. All SHA-256 checksum computations execute entirely inside your local browser via native `crypto.subtle.digest`.
+   - Close the browser tab before reconnecting to the internet.
+
+2. **Option 2 (Air-gapped PC / Maximum Security):**
+   - Download the standalone [`index.html`](index.html) file (press `Ctrl+S`).
+   - Copy `index.html` to a clean USB flash drive.
+   - Open and run `index.html` on a permanently air-gapped machine with no network interfaces.
 
 ---
 
-## 🚀 Возможности
-- Автодополнение и валидация слов по официальному словарю BIP-39.
-- Поле для быстрой вставки всей фразы сразу.
-- Индикатор сетевого статуса (онлайн / оффлайн).
-- Быстрое копирование готовой 12-словной фразы по клику на найденное слово.
-- Никаких внешних библиотек или трекеров — 100% автономный HTML.
+## ⚙️ Mathematical Background
+
+- The standard BIP-39 English dictionary contains 2048 words (`2^11`). Each word represents an 11-bit index.
+- 11 words encode: `11 words * 11 bits = 121 bits`.
+- A 12-word mnemonic phrase consists of 128 bits of entropy + 4 bits of checksum (`128 + 4 = 132 bits = 12 * 11 bits`).
+- The 4-bit checksum is defined as the first 4 bits of the SHA-256 hash of the 128-bit entropy.
+- The 12th word contains the remaining **7 bits of entropy** (`128 - 121 = 7 bits`) and the **4 bits of checksum**.
+- Because 7 bits provide `2^7 = 128` possible states, and each state yields exactly one valid 4-bit SHA-256 checksum, there are always **exactly 128 mathematically valid candidates** for the 12th word out of the 2048-word dictionary for any combination of 11 words.
+
+---
+
+## ✨ Features
+
+- **100% Offline & Self-Contained:** The full 2048-word BIP-39 list and SHA-256 logic are embedded directly into a single `index.html` file.
+- **Dynamic Network Monitor:** Visual status badge alerts you if the network connection is active or disconnected.
+- **Smart Inputs & Autocomplete:** Real-time validation and prefix suggestions for all BIP-39 words.
+- **Quick Paste:** Paste all 11 words separated by whitespace directly into the quick paste area.
+- **One-Click Copy:** Click any candidate word to copy the complete 12-word recovery phrase directly to your clipboard.
+- **Zero Dependencies:** Pure HTML/CSS/JavaScript with zero third-party CDNs, fonts, or tracking scripts.
