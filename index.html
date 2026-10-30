@@ -489,11 +489,11 @@ function updateAutocomplete(idx) {
   const input = inputs[idx].input;
   const auto = inputs[idx].auto;
   const val = input.value.trim().toLowerCase();
-  if (val.length < 2 || WORD_SET.has(val)) {
+  if (val.length < 1 || WORD_SET.has(val)) {
     auto.style.display = 'none';
     return;
   }
-  const matches = BIP39_WORDS.filter(w => w.startsWith(val)).slice(0, 6);
+  const matches = BIP39_WORDS.filter(w => w.startsWith(val)).slice(0, 10);
   if (matches.length === 0) {
     auto.style.display = 'none';
     return;
