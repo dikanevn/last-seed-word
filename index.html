@@ -168,7 +168,7 @@
       border: 1px solid var(--border);
       border-radius: 8px;
       margin-top: 4px;
-      max-height: 140px;
+      max-height: 220px;
       overflow-y: auto;
       z-index: 50;
       box-shadow: 0 10px 20px rgba(0,0,0,0.4);
@@ -493,7 +493,7 @@ function updateAutocomplete(idx) {
     auto.style.display = 'none';
     return;
   }
-  const matches = BIP39_WORDS.filter(w => w.startsWith(val)).slice(0, 10);
+  const matches = BIP39_WORDS.filter(w => w.startsWith(val));
   if (matches.length === 0) {
     auto.style.display = 'none';
     return;
